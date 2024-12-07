@@ -1,0 +1,212 @@
+/* CSS Variables */
+:root {
+    /* Colors */
+    --primary: rgb(0, 122, 255);
+    --secondary: rgb(88, 86, 214);
+    --accent: rgb(255, 55, 95);
+    --background: rgb(0, 0, 0);
+    
+    /* Text Colors */
+    --text-primary: rgb(255, 255, 255);
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    
+    /* Effects */
+    --glow-primary: rgba(0, 122, 255, 0.2);
+    --glow-secondary: rgba(88, 86, 214, 0.15);
+    --glass-bg: rgba(0, 0, 0, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    
+    /* Transitions */
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Typography */
+    --font-primary: 'Lexend Deca', sans-serif;
+}
+
+/* Base Styles */
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;600&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-primary);
+    background: var(--background);
+    color: var(--text-primary);
+    overflow: hidden;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Layout Components */
+.canvas-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#animation-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(
+        135deg,
+        var(--background) 0%,
+        rgb(20, 20, 20) 50%,
+        var(--background) 100%
+    );
+}
+
+/* Canvas Elements */
+.canvas-element {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    mix-blend-mode: plus-lighter;
+}
+
+#three-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    mix-blend-mode: plus-lighter;
+    opacity: 0.95;
+}
+
+#particle-canvas,
+#lightning-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    mix-blend-mode: plus-lighter;
+}
+
+/* Typography Components */
+#name {
+    font-family: var(--font-primary);
+    font-size: clamp(4rem, 8.5vw, 8.5rem);
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    text-transform: lowercase;
+    letter-spacing: -0.04em;
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    text-align: center;
+}
+
+#name span {
+    display: block;
+    background: linear-gradient(
+        135deg,
+        var(--text-primary) 0%,
+        rgba(255, 255, 255, 0.85) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Navigation */
+#links {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 1rem;
+    border: 1px solid var(--glass-border);
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    transition: all 0.3s var(--transition-smooth);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Visual Effects */
+.glow-effect {
+    position: absolute;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    filter: blur(70px);
+    opacity: 0.15;
+    background: radial-gradient(
+        circle at center,
+        var(--primary),
+        var(--secondary),
+        transparent 70%
+    );
+    animation: subtle-pulse 8s ease-in-out infinite;
+    transform-origin: center;
+}
+
+.shockwave {
+    position: absolute;
+    pointer-events: none;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: 
+        0 0 50px 10px var(--primary),
+        0 0 100px 20px var(--secondary);
+    animation: apple-shockwave 2s var(--transition-smooth);
+    transform: scale(1);
+    opacity: 0;
+    mix-blend-mode: plus-lighter;
+}
+
+/* Animations */
+@keyframes subtle-pulse {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.15;
+    }
+    50% {
+        transform: scale(1.1) rotate(180deg);
+        opacity: 0.2;
+    }
+}
+
+@keyframes apple-shockwave {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(100);
+        opacity: 0;
+    }
+}
+
+.unselectable {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+} 
